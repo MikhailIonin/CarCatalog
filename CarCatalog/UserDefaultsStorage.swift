@@ -1,15 +1,42 @@
 import Foundation
 
-protocol Storage: AnyObject {
+protocol IStorage: AnyObject {
+
+	var selectedCar: Car? { get set }
+	var onReloadStorage: (() -> Void)? { get set }
 
 	var storedCars: [Car] { get }
-	func store(cars: [Car])
+
+	func add(car: Car)
+	func edit(car: Car)
+	func remove(car: Car)
 
 }
 
-final class StorageService: Storage {
+//final class CoreDataStorage: IStorage {
+//	var selectedCar: Car?
+//
+//	var onReloadStorage: (() -> Void)?
+//
+//	var storedCars: [Car]
+//
+//	func add(car: Car) {
+//		<#code#>
+//	}
+//
+//	func edit(car: Car) {
+//		<#code#>
+//	}
+//
+//	func remove(car: Car) {
+//		<#code#>
+//	}
+//
+//}
 
-	static let shared: StorageService = StorageService(userDefaults: .standard)
+final class UserDefaultsStorage: IStorage {
+
+	static let shared: UserDefaultsStorage = UserDefaultsStorage(userDefaults: .standard)
 
 	var selectedCar: Car?
 	var onReloadStorage: (() -> Void)?
@@ -21,11 +48,15 @@ final class StorageService: Storage {
 		self.userDefaults = userDefaults
 		self.loadCars()
 
-//		self.store(cars: [
-//			Car(uuid: UUID().uuidString, year: "1991", vendor: "Toyota", model: "Mark II", bodyType: "Sedan"),
-//			Car(uuid: UUID().uuidString, year: "1992", vendor: "Lexus", model: "RX350", bodyType: "SUV"),
-//			Car(uuid: UUID().uuidString, year: "2020", vendor: "Bugatti", model: "Chiron", bodyType: "Roadster"),
-//		])
+		// self.addDebugCars()
+	}
+
+	private func addDebugCars() {
+		self.store(cars: [
+			Car(uuid: UUID().uuidString, year: "1991", vendor: "Toyota", model: "Mark II", bodyType: "Sedan"),
+			Car(uuid: UUID().uuidString, year: "1992", vendor: "Lexus", model: "RX350", bodyType: "SUV"),
+			Car(uuid: UUID().uuidString, year: "2020", vendor: "Bugatti", model: "Chiron", bodyType: "Roadster"),
+		])
 	}
 
 	func edit(car: Car) {
@@ -49,7 +80,7 @@ final class StorageService: Storage {
 		}
 	}
 
-	func store(cars: [Car]) {
+	private func store(cars: [Car]) {
 		let encoder = JSONEncoder()
 		if let encoded = try? encoder.encode(cars) {
 			self.userDefaults.set(encoded, forKey: "storedCars")

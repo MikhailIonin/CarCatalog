@@ -8,7 +8,7 @@ final class DetailsCarViewController: UIViewController {
 	@IBOutlet weak var model: UITextField!
 	@IBOutlet weak var bodyType: UITextField!
 
-	private let storage = StorageService.shared
+	private let storage: IStorage = UserDefaultsStorage.shared
 
 	override func viewDidLoad() {
 		super.viewDidLoad()

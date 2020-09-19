@@ -2,7 +2,7 @@ import UIKit
 
 class CarViewController: UITableViewController {
 
-	private let storage = StorageService.shared
+	private let storage: IStorage = UserDefaultsStorage.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,4 +74,3 @@ class CarViewController: UITableViewController {
 	}
 
  }
-
