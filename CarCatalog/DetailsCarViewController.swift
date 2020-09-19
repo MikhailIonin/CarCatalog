@@ -13,6 +13,8 @@ final class DetailsCarViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		self.year.keyboardType = .decimalPad
+
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(
 			title: "Save",
 			style: .plain,
