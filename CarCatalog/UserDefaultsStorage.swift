@@ -21,15 +21,15 @@ protocol IStorage: AnyObject {
 //	var storedCars: [Car]
 //
 //	func add(car: Car) {
-//		<#code#>
+//
 //	}
 //
 //	func edit(car: Car) {
-//		<#code#>
+//
 //	}
 //
 //	func remove(car: Car) {
-//		<#code#>
+//
 //	}
 //
 //}
