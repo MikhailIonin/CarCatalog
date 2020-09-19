@@ -18,9 +18,7 @@ class CarViewController: UITableViewController {
 
 		self.storage.onReloadStorage = {
 			DispatchQueue.main.async { [weak self] in
-				UIView.animate(withDuration: 0.3) {
-					self?.tableView.reloadData()
-				}
+				self?.tableView.reloadData()
 			}
 		}
     }

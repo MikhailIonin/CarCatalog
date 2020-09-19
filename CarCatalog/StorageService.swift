@@ -31,7 +31,7 @@ final class StorageService: Storage {
 	func edit(car: Car) {
 		if let index = self.storedCars.index(of: car) {
 			self.storedCars.remove(at: index)
-			self.storedCars.insert(car, at: index - 1)
+			self.storedCars.insert(car, at: index)
 			self.store(cars: self.storedCars)
 		}
 	}
